@@ -1,0 +1,13 @@
+/* Cores */
+:root {
+    --blue-primary: #0500FF;
+    --blue-10: #EDEFFB;
+    --black-neutral: #1C1C1C;
+    --gray-20-neutral: #9E9E9E;
+    --gray-10-neutral: #DFDFDF;
+    --gray-05-neutral: #F5F5F5;
+    --gray-00-neutral: #F0F0F0;
+    --white-neutral: #FFFFFF;
+}
+
+body {}
