@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Desafio Front-End</title>
         <link rel="stylesheet" href="base.css">
     </head>
     <body>
         <header>
-            <img src="/img/logo.png" alt="Logo da BeTalent">
+            <img src="/img/logo.png" alt="Logo da BeTalent" />
         </header>
 
-        <div id="" class="titulo__e__filtros">
-            <h1>Funcionários</h1>
-            <input id="filtros" type="text" placeholder="Pesquisar">
-        </div>
+        <main>
+            <section id="" class="titulo__e__filtros">
+                <h1>Funcionários</h1>
+                <input id="filtros" type="text" placeholder="Pesquisar" />
+            </section>
 
-        <table id="" class="">
-            <tr>
-                <th></th>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-        </table>
+            <table id="tabela__funcionarios" class="">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nome</th>
+                        <th>Cargo</th>
+                        <th>Data de admissão</th>
+                        <th>Telefone</th>
+                    </tr>
+                </thead>
+                <tbody id="infos__funcionarios">
+                </tbody>
+            </table>
+        </main>
+
+        <script src="script.js"></script>
     </body>
 </html>
