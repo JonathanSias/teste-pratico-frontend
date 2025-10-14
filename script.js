@@ -35,7 +35,7 @@ function populaTabela(listaFuncionarios) {
 
         // Data de admissão
         const colunaAdmissao = document.createElement("td");
-        colunaAdmissao.textContent = funcionario.admission_date;
+        colunaAdmissao.textContent = formataData(funcionario.admission_date);
 
         // Telefone
         const colunaTelefone = document.createElement("td");
@@ -45,6 +45,19 @@ function populaTabela(listaFuncionarios) {
         tr.append(colunaFoto, colunaNome, colunaCargo, colunaAdmissao, colunaTelefone);
         infosFuncionarios.appendChild(tr);
     });
+}
+
+// Formatação da data: dd/mm/aaaa
+function formataData(data) {
+    const dataFormatada = new Date(data);
+    // Dia do mês, garantindo 2 dígitos
+    const dia = String(dataFormatada.getUTCDate()).padStart(2, "0");
+    // Mês + 1, pois retorna de 0-11, sendo assim temos 1-12
+    const mes = String(dataFormatada.getUTCMonth() + 1).padStart(2, "0");
+    // Ano de admissão
+    const ano = dataFormatada.getUTCFullYear();
+    // Retorna no padrão desejado
+    return `${dia}/${mes}/${ano}`;
 }
 
 buscaFuncionarios();
