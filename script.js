@@ -1,2 +1,50 @@
 // URL da API para json-server
-const URL_API = "http://localhost:3000";
+const URL_API = "http://localhost:3000/employees";
+
+// Elementos que serão utilizados (corpo da tabela e input de filtros)
+const infosFuncionarios = document.getElementById("infos__funcionarios");
+const filtros = document.getElementById("filtros");
+
+// Pega funcionários de API e chama função que vai popular a tabela
+async function buscaFuncionarios() {
+    const busca = await fetch(URL_API);
+    const listaFuncionarios = await busca.json();
+    populaTabela(listaFuncionarios);
+}
+
+// 
+function populaTabela(listaFuncionarios) {
+
+    listaFuncionarios.forEach(funcionario => {
+        const tr = document.createElement("tr");
+
+        // Foto
+        const colunaFoto = document.createElement("td");
+        const imagem = document.createElement("img");
+        imagem.src = funcionario.image;
+        imagem.className = "foto__do__funcionario";
+        colunaFoto.appendChild(imagem);
+
+        // Nome
+        const colunaNome = document.createElement("td");
+        colunaNome.textContent = funcionario.name;
+
+        // Cargo
+        const colunaCargo = document.createElement("td");
+        colunaCargo.textContent = funcionario.job;
+
+        // Data de admissão
+        const colunaAdmissao = document.createElement("td");
+        colunaAdmissao.textContent = funcionario.admission_date;
+
+        // Telefone
+        const colunaTelefone = document.createElement("td");
+        colunaTelefone.textContent = funcionario.phone;
+
+        // 
+        tr.append(colunaFoto, colunaNome, colunaCargo, colunaAdmissao, colunaTelefone);
+        infosFuncionarios.appendChild(tr);
+    });
+}
+
+buscaFuncionarios();
