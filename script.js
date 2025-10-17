@@ -5,15 +5,19 @@ const URL_API = "http://localhost:3000/employees";
 const infosFuncionarios = document.getElementById("infos__funcionarios");
 const filtros = document.getElementById("filtros");
 
+// Array que vai armazenar todos os funcionários
+let listaFuncionarios = [];
+
 // Pega funcionários de API e chama função que vai popular a tabela
 async function buscaFuncionarios() {
     const busca = await fetch(URL_API);
-    const listaFuncionarios = await busca.json();
+    listaFuncionarios = await busca.json();
     populaTabela(listaFuncionarios);
 }
 
-// 
+// Populando a tabela
 function populaTabela(listaFuncionarios) {
+    infosFuncionarios.innerHTML = '';
 
     listaFuncionarios.forEach(funcionario => {
         const tr = document.createElement("tr");
@@ -41,7 +45,6 @@ function populaTabela(listaFuncionarios) {
         const colunaTelefone = document.createElement("td");
         colunaTelefone.textContent = funcionario.phone;
 
-        // 
         tr.append(colunaFoto, colunaNome, colunaCargo, colunaAdmissao, colunaTelefone);
         infosFuncionarios.appendChild(tr);
     });
@@ -59,5 +62,29 @@ function formataData(data) {
     // Retorna no padrão desejado
     return `${dia}/${mes}/${ano}`;
 }
+
+// Filtro do input de texto
+function filtrarInfos() {
+    const inputTexto = filtros.value.toLowerCase().trim();
+
+    // Retorna todas as infos caso o input esteja vazio
+    if (inputTexto === '') {
+        populaTabela(listaFuncionarios);
+        return;
+    }
+
+    const infosFiltradas = listaFuncionarios.filter(funcionario => {
+        return (
+            funcionario.name.toLowerCase().includes(inputTexto) || 
+            funcionario.job.toLowerCase().includes(inputTexto) || 
+            funcionario.phone.toLowerCase().includes(inputTexto)
+        );
+    });
+
+    populaTabela(infosFiltradas);
+}
+
+// Aguarda input de texto no campo de filtros
+filtros.addEventListener('input', filtrarInfos);
 
 buscaFuncionarios();
