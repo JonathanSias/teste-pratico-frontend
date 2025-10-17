@@ -5,6 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Desafio Front-End</title>
         <link rel="stylesheet" href="base.css">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
         <header>
@@ -22,9 +26,10 @@
                     <tr>
                         <th>Foto</th>
                         <th>Nome</th>
-                        <th>Cargo</th>
-                        <th>Data de admissão</th>
-                        <th>Telefone</th>
+                        <th class="desktop__only">Cargo</th>
+                        <th class="desktop__only">Data de admissão</th>
+                        <th class="desktop__only telefone">Telefone</th>
+                        <th class="mobile__only"></th>
                     </tr>
                 </thead>
                 <tbody id="infos__funcionarios">
@@ -32,6 +37,8 @@
             </table>
         </main>
 
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="script.js"></script>
     </body>
 </html>

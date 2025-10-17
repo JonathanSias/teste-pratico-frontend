@@ -17,6 +17,7 @@ body {
 
     h1, h2, h3 {
         font-family: 'Helvetica';
+        margin: 0;
     }
 
     h1 {
@@ -56,6 +57,7 @@ body {
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
+            gap: 24px;
 
             input {
                 padding: 0 16px;
@@ -64,8 +66,8 @@ body {
                 border: 1px solid var(--gray-10-neutral);
                 border-radius: 8px;
                 height: 48px;
-                min-width: 287px;
-                max-width: 335px;
+                width: 100%;
+                max-width: 287px;
                 outline: none;
             }
         }
@@ -86,12 +88,13 @@ body {
                     th {
                         padding: 16px 0;
                         font-weight: 500;
+                        text-align: center;
 
                         &:first-child {
                             border-top-left-radius: 8px;
                         }
 
-                        &:last-child {
+                        &:nth-child(5), &:last-child {
                             border-top-right-radius: 8px;
                         }
                     }
@@ -127,5 +130,74 @@ body {
     }
 }
 
-/* Media querie */
-@media (max-width: 768px) {}
+/* Media queries */
+@media (min-width: 769px) {
+    .mobile__only {
+        display: none !important;
+        border-top-right-radius: 8px;
+    }
+
+    /* Ocultando os detalhes ao voltar para resolução maior */
+    .tr__detalhes {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .titulo__e__filtros {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+
+        input#filtros {
+            max-width: 768px !important;
+        }
+    }
+
+    .desktop__only {
+        display: none !important;
+    }
+    
+    .accordion__detalhes {
+        padding: 30px !important;
+    }
+    
+    .detalhes__colunas__mobile {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px dashed var(--gray-10-neutral);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .detalhe__cargo, .detalhe__admissao, .detalhe__telefone {
+            color: var(--black-neutral);
+            font-weight: 500;
+        }
+    }
+
+    .admissao {
+        margin: 15px 0;
+    }
+    
+    .btn-expand {
+        background: none;
+        border: none;
+        color: var(--blue-primary);
+        cursor: pointer;
+        padding: 4px 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .btn-expand .material-icons {
+        font-size: 20px;
+        transition: transform 0.3s ease;
+    }
+    
+    /* Rotaciona o ícone quando o accordion está aberto */
+    .btn-expand[aria-expanded="true"] .material-icons {
+        transform: rotate(180deg);
+    }
+}

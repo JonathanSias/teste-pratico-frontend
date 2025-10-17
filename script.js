@@ -19,8 +19,8 @@ async function buscaFuncionarios() {
 function populaTabela(listaFuncionarios) {
     infosFuncionarios.innerHTML = '';
 
-    listaFuncionarios.forEach(funcionario => {
-        const tr = document.createElement("tr");
+    listaFuncionarios.forEach((funcionario, index) => {
+        const trPrincipal = document.createElement("tr");
 
         // Foto
         const colunaFoto = document.createElement("td");
@@ -36,17 +36,58 @@ function populaTabela(listaFuncionarios) {
         // Cargo
         const colunaCargo = document.createElement("td");
         colunaCargo.textContent = funcionario.job;
+        colunaCargo.className = "desktop__only";
 
         // Data de admissão
         const colunaAdmissao = document.createElement("td");
         colunaAdmissao.textContent = formataData(funcionario.admission_date);
+        colunaAdmissao.className = "desktop__only";
 
         // Telefone
         const colunaTelefone = document.createElement("td");
         colunaTelefone.textContent = funcionario.phone;
+        colunaTelefone.className = "desktop__only";
 
-        tr.append(colunaFoto, colunaNome, colunaCargo, colunaAdmissao, colunaTelefone);
-        infosFuncionarios.appendChild(tr);
+        // 
+        const colunaExpandir = document.createElement("td");
+        colunaExpandir.className = "mobile__only";
+        const btnExpandir = document.createElement("button");
+        btnExpandir.className = "btn-expand";
+        btnExpandir.innerHTML = '<i class="material-icons">expand_more</i>';
+        btnExpandir.setAttribute("data-bs-toggle", "collapse");
+        btnExpandir.setAttribute("data-bs-target", `#detalhes__${index}`);
+        btnExpandir.setAttribute("aria-expanded", "false");
+        colunaExpandir.appendChild(btnExpandir);
+
+        trPrincipal.append(colunaFoto, colunaNome, colunaCargo, colunaAdmissao, colunaTelefone, colunaExpandir);
+        infosFuncionarios.appendChild(trPrincipal);
+
+        // Detalhes e accordion
+        const trDetalhes = document.createElement("tr");
+        trDetalhes.className = "tr__detalhes collapse";
+        trDetalhes.id = `detalhes__${index}`;
+
+        const colunaDetalhes = document.createElement("td");
+        colunaDetalhes.colSpan = 6; // Ocupa todas as colunas
+        colunaDetalhes.className = "accordion__detalhes";
+
+        colunaDetalhes.innerHTML = `
+            <div class="detalhes__colunas__mobile">
+                <span class="detalhe__cargo">Cargo</span>
+                <span>${funcionario.job}</span>
+            </div>
+            <div class="detalhes__colunas__mobile admissao">
+                <span class="detalhe__admissao">Data de admissão</span>
+                <span>${formataData(funcionario.admission_date)}</span>
+            </div>
+            <div class="detalhes__colunas__mobile">
+                <span class="detalhe__telefone">Telefone</span>
+                <span>${funcionario.phone}</span>
+            </div>
+        `;
+
+        trDetalhes.appendChild(colunaDetalhes);
+        infosFuncionarios.appendChild(trDetalhes);
     });
 }
 
